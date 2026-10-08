@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Traffic Sim — BH</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <canvas id="map"></canvas>
+
+    <div class="sidebar">
+    <aside class="panel top-left">
+      <h1>Traffic Sim</h1>
+      <div class="subtitle" id="map-name">Carregando mapa…</div>
+      <div class="stats" id="stats"></div>
+      <input id="search" list="street-names" placeholder="Buscar via… (ex: Av. Afonso Pena)" autocomplete="off" />
+      <datalist id="street-names"></datalist>
+      <div class="toggles">
+        <label><input type="checkbox" id="opt-labels" checked /> Nomes</label>
+        <label><input type="checkbox" id="opt-lanes" checked /> Faixas</label>
+        <label><input type="checkbox" id="opt-arrows" checked /> Sentido</label>
+        <label><input type="checkbox" id="opt-nodes" /> Cruzamentos</label>
+      </div>
+      <button id="reset-view">Ver a região inteira</button>
+      <a id="map-switch" class="map-switch"></a>
+    </aside>
+
+    <aside class="panel sim" id="sim-panel">
+      <div class="sim-head">
+        <div>
+          <div class="clock" id="clock">--:--:--</div>
+          <div class="subtitle">Dia útil · ida ao trabalho</div>
+        </div>
+        <button id="play" class="play" title="Espaço">⏸</button>
+      </div>
+      <button id="signals-toggle" class="signals-toggle"></button>
+      <div class="speeds" id="speeds">
+        <button data-speed="1">1×</button>
+        <button data-speed="5">5×</button>
+        <button data-speed="10">10×</button>
+        <button data-speed="30">30×</button>
+      </div>
+      <label class="slider">
+        <span>Demanda <b id="demand-label"></b></span>
+        <input type="range" id="demand" min="10" max="150" step="5" />
+        <small class="hint">100% = radares BHTrans 2023 + cenário com mais travessias do centro</small>
+      </label>
+      <label class="slider">
+        <span>Caos <b id="chaos-label"></b></span>
+        <input type="range" id="chaos" min="0" max="80" step="5" />
+        <small class="hint">fração de motoristas apressados e barbeiros</small>
+      </label>
+      <dl class="sim-stats" id="sim-stats"></dl>
+      <div class="toggles">
+        <label><input type="checkbox" id="opt-cars" checked /> Carros</label>
+        <label><input type="checkbox" id="opt-signals" checked /> Semáforos</label>
+        <label><input type="checkbox" id="opt-traffic" /> Trânsito</label>
+      </div>
+      <div class="legend">
+        <span><i style="background:#d93b30"></i>parado</span>
+        <span><i style="background:#f08a24"></i>lento</span>
+        <span><i style="background:#f2c94c"></i>médio</span>
+        <span><i style="background:#2f9e55"></i>livre</span>
+        <span><i style="background:#c026d3"></i>fechando cruzamento</span>
+      </div>
+      <div class="legend">
+        <span><b class="sig osm"></b>semáforo OSM</span>
+        <span><b class="sig est"></b>semáforo estimado</span>
+      </div>
+    </aside>
+    </div>
+
+    <div class="loading" id="loading" hidden><div class="loading-box"><b>Aquecendo a simulação…</b><span id="loading-text"></span><div class="progress"><div id="progress-bar"></div></div></div></div>
+
+    <aside class="panel info" id="info" hidden></aside>
+
+    <div class="scale" id="scale"><div class="bar"></div><span></span></div>
+    <div class="attribution" id="attribution"></div>
+  </body>
+  <script type="module" src="/src/main.ts"></script>
+</html>

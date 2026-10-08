@@ -1,0 +1,21 @@
+{
+  "name": "bh-traffic-simulator",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "map:build": "node scripts/build-map.mjs",
+    "map:subarea": "tsx scripts/build-subarea.ts",
+    "bench": "tsx scripts/bench.ts",
+    "validate:speeds": "tsx scripts/compare-speeds.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.1"
+  },
+  "description": "Simulador de trânsito microscópico de Belo Horizonte (centro, dentro da Av. do Contorno), calibrado com dados abertos da BHTrans"
+}

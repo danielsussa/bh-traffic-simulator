@@ -1,0 +1,74 @@
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #f3f1ec; }
+body { font: 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; color: #263041; }
+canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; cursor: grab; }
+canvas.dragging { cursor: grabbing; }
+
+.panel {
+  position: fixed; background: rgba(255,255,255,0.94); border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(20,30,50,0.15); padding: 12px 14px;
+  backdrop-filter: blur(6px);
+}
+.sidebar {
+  position: fixed; top: 12px; left: 12px; bottom: 40px; width: 272px;
+  display: flex; flex-direction: column; gap: 10px; overflow-y: auto; pointer-events: none;
+}
+.sidebar .panel { position: static; pointer-events: auto; flex: none; }
+.top-left { display: flex; flex-direction: column; gap: 8px; }
+h1 { margin: 0; font-size: 16px; letter-spacing: 0.2px; }
+.subtitle { color: #5b6678; margin-top: -6px; }
+.stats { font-size: 12px; color: #6b7587; font-variant-numeric: tabular-nums; }
+#search { width: 100%; padding: 6px 8px; border: 1px solid #cfd6e0; border-radius: 6px; font: inherit; }
+.toggles { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 8px; }
+.toggles label { display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; }
+button {
+  font: inherit; padding: 6px 8px; border: 1px solid #cfd6e0; border-radius: 6px;
+  background: #fff; cursor: pointer;
+}
+button:hover { background: #f1f4f8; }
+
+.info { top: 12px; right: 12px; width: 250px; }
+.info h2 { margin: 0 0 6px; font-size: 14px; }
+.info dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; margin: 0; }
+.info dt { color: #6b7587; }
+.info dd { margin: 0; font-variant-numeric: tabular-nums; }
+.info .hint { margin-top: 8px; font-size: 11px; color: #8a93a3; }
+
+.scale {
+  position: fixed; left: 12px; bottom: 12px; font-size: 11px; color: #3a4250;
+  display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.8);
+  padding: 3px 6px; border-radius: 4px;
+}
+.scale .bar { height: 6px; border: 1.5px solid #3a4250; border-top: none; }
+.attribution {
+  position: fixed; right: 8px; bottom: 6px; font-size: 11px; color: #5b6678;
+  background: rgba(255,255,255,0.8); padding: 2px 6px; border-radius: 4px;
+}
+
+.sim { display: flex; flex-direction: column; gap: 8px; }
+.sim-head { display: flex; justify-content: space-between; align-items: center; }
+.clock { font-size: 26px; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: 0.5px; }
+.play { width: 44px; height: 44px; font-size: 18px; border-radius: 50%; }
+.speeds { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+.speeds button.active { background: #263041; color: #fff; border-color: #263041; }
+.slider { display: flex; flex-direction: column; gap: 2px; }
+.slider span { display: flex; justify-content: space-between; color: #5b6678; }
+.slider input { width: 100%; }
+.sim-stats { display: grid; grid-template-columns: auto 1fr; gap: 1px 10px; margin: 0; font-size: 12px; }
+.sim-stats dt { color: #6b7587; }
+.sim-stats dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.legend { display: flex; gap: 8px; font-size: 11px; color: #5b6678; flex-wrap: wrap; }
+.legend i { display: inline-block; width: 10px; height: 6px; border-radius: 2px; margin-right: 3px; vertical-align: middle; }
+.loading { position: fixed; inset: 0; display: grid; place-items: center; background: rgba(243,241,236,0.55); }
+.loading[hidden] { display: none; }
+.loading-box { background: #fff; padding: 16px 20px; border-radius: 10px; box-shadow: 0 2px 12px rgba(20,30,50,0.2); display: flex; flex-direction: column; gap: 6px; min-width: 260px; }
+.progress { height: 6px; background: #e6e9ee; border-radius: 3px; overflow: hidden; }
+.progress div { height: 100%; width: 0; background: #2f9e55; transition: width 0.1s; }
+.legend .sig { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 4px; vertical-align: middle; box-sizing: border-box; }
+.legend .sig.osm { background: #1fbf4c; border: 1px solid #fff; box-shadow: 0 0 0 1px #c9ced6; }
+.legend .sig.est { background: #fff; border: 2px solid #1fbf4c; }
+.slider .hint { color: #8a93a3; font-size: 11px; }
+.map-switch { font-size: 12px; color: #2563eb; text-align: center; text-decoration: none; }
+.map-switch:hover { text-decoration: underline; }
+.signals-toggle { font-weight: 600; }
+.signals-toggle.off { background: #fef3c7; border-color: #f59e0b; color: #92400e; }
